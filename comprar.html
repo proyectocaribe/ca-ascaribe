@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Compra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Fondo claro */
+        }
+
+        .form-section {
+            background-color: #ffffff; /* Fondo blanco */
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        h1, h3 {
+            color: #198754; /* Verde Bootstrap */
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #084298;
+            transform: scale(1.05);
+        }
+
+        .btn-success {
+            background-color: #198754;
+            border-color: #198754;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-success:hover {
+            background-color: #145c32;
+            transform: scale(1.05);
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        input:focus {
+            border-color: #198754;
+            box-shadow: 0px 0px 8px rgba(25, 135, 84, 0.5);
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index2.html">
+                <img src="images/logo.png" alt="Logo Caña Caribe" width="50">
+                Caña Caribe
+            </a>
+        </div>
+    </nav>
+
+    <!-- Formulario de compra -->
+    <section class="py-5">
+        <div class="container form-container">
+            <h1 class="text-center text-success mb-4" id="titulo-producto">Formulario de Compra</h1>
+            <form id="form-compra">
+                <!-- Paso 1: Información Personal -->
+                <div id="paso1" class="form-section">
+                    <h3 class="mb-4">Información Personal</h3>
+                    <div class="mb-3">
+                        <label for="nombre1" class="form-label">Primer Nombre</label>
+                        <input type="text" id="nombre1" class="form-control" placeholder="Ingresa tu primer nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre2" class="form-label">Segundo Nombre</label>
+                        <input type="text" id="nombre2" class="form-control" placeholder="Ingresa tu segundo nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido1" class="form-label">Primer Apellido</label>
+                        <input type="text" id="apellido1" class="form-control" placeholder="Ingresa tu primer apellido" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido2" class="form-label">Segundo Apellido</label>
+                        <input type="text" id="apellido2" class="form-control" placeholder="Ingresa tu segundo apellido">
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" id="direccion" class="form-control" placeholder="Ingresa tu dirección" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cantidad" class="form-label">Cantidad</label>
+                        <input type="number" id="cantidad" class="form-control" min="1" placeholder="Número de unidades" required>
+                    </div>
+                    <button type="button" id="siguientePaso" class="btn btn-primary w-100 mt-3">Siguiente</button>
+                </div>
+
+                <!-- Paso 2: Información de la Tarjeta -->
+                <div id="paso2" class="form-section d-none">
+                    <h3 class="mb-4">Información de Pago</h3>
+                    <div class="mb-3">
+                        <label for="tarjeta" class="form-label">Número de Tarjeta</label>
+                        <input type="text" id="tarjeta" class="form-control" maxlength="19" placeholder="1234-5678-9012-3456" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cvv" class="form-label">Código de Seguridad (CVV)</label>
+                        <input type="number" id="cvv" class="form-control" maxlength="3" placeholder="123" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento (MM/AA)</label>
+                        <input type="text" id="fechaVencimiento" class="form-control" maxlength="5" placeholder="MM/AA" required>
+                    </div>
+                    <button type="button" id="confirmarCompra" class="btn btn-success w-100 mt-3">Confirmar Compra</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Modal para el mensaje de confirmación -->
+    <div class="modal fade" id="mensajeModal" tabindex="-1" aria-labelledby="mensajeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success" id="mensajeModalLabel">¡Gracias por su compra!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="mensajeConfirmacion" class="fs-5"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="aceptarCompra">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>&copy; 2024 Caña Caribe S.A.S - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Datos de los productos
+        const productos = {
+            1: {
+                titulo: "Bebida Artesanal",
+                imagen: "images/producto.jpg",
+                descripcion: "Nuestra bebida alcohólica es obtenida de la fermentación del jugo de caña de azúcar (guarapo), resultando en un líquido con un aroma y sabor característico.",
+                detalles: [
+                    { label: "Grado de alcohol", valor: "66°" },
+                    { label: "PH", valor: "4% de acidez" },
+                    { label: "Color", valor: "Verde claro a amarillo" },
+                    { label: "Textura", valor: "Viscosa" },
+                    { label: "Capacidad", valor: "200 litros" },
+                    { label: "Material", valor: "Madera de roble" },
+                    { label: "Precio", valor: "USD $2.700" }
+                ],
+                precio: 2700
+            },
+            2: {
+                titulo: "Camión Cisterna",
+                imagen: "images/producto2.jpg",
+                descripcion: "Camión cisterna con capacidad de 10,000 litros para transporte seguro y eficiente.",
+                detalles: [
+                    { label: "Capacidad", valor: "10,000 litros" },
+                    { label: "Valor", valor: "USD $34.324,20" }
+                ],
+                precio: 3432420
+            },
+            3: {
+                titulo: "Contenedor Flexitank",
+                imagen: "images/producto3.jpg",
+                descripcion: "Contenedor Flexitank con capacidad de 26,000 litros, ideal para transporte eficiente.",
+                detalles: [
+                    { label: "Capacidad", valor: "26,000 litros" },
+                    { label: "Valor", valor: "USD $89.242,92" }
+                ],
+                precio: 8924292
+            }
+        };
+    
+        // Leer ID del producto desde la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productoId = urlParams.get('id');
+    
+        // Variables de pasos del formulario
+        const paso1 = document.getElementById('paso1');
+        const paso2 = document.getElementById('paso2');
+        const siguientePaso = document.getElementById('siguientePaso');
+        const confirmarCompra = document.getElementById('confirmarCompra');
+        const aceptarCompra = document.getElementById('aceptarCompra');
+    
+        // Manejo del flujo entre pasos del formulario
+        siguientePaso.addEventListener('click', () => {
+            const cantidad = document.getElementById('cantidad').value;
+            const direccion = document.getElementById('direccion').value;
+    
+            // Validar los campos obligatorios antes de avanzar
+            if (!cantidad || cantidad <= 0 || !direccion) {
+                alert('Por favor, completa todos los campos requeridos.');
+                return;
+            }
+    
+            paso1.classList.add('d-none');
+            paso2.classList.remove('d-none');
+        });
+    
+        // Formatear número de tarjeta automáticamente
+        const tarjetaInput = document.getElementById('tarjeta');
+        tarjetaInput.addEventListener('input', (e) => {
+            let valor = e.target.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+            valor = valor.replace(/(\d{4})(?=\d)/g, '$1-'); // Agregar guiones cada 4 dígitos
+            e.target.value = valor.substring(0, 19); // Limitar a 19 caracteres
+        });
+    
+        // Limitar CVV a 3 dígitos
+        const cvvInput = document.getElementById('cvv');
+        cvvInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.slice(0, 3);
+        });
+    
+        // Validar fecha de vencimiento (MM/AA)
+        const fechaVencimientoInput = document.getElementById('fechaVencimiento');
+        fechaVencimientoInput.addEventListener('input', (e) => {
+            let valor = e.target.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+            if (valor.length > 2) {
+                valor = valor.substring(0, 2) + '/' + valor.substring(2, 4); // Formato MM/AA
+            }
+            e.target.value = valor.substring(0, 5); // Limitar a 5 caracteres
+        });
+    
+        // Confirmar Compra
+        confirmarCompra.addEventListener('click', () => {
+            const primerNombre = document.getElementById('nombre1').value;
+            const segundoNombre = document.getElementById('nombre2').value || '';
+            const primerApellido = document.getElementById('apellido1').value;
+            const segundoApellido = document.getElementById('apellido2').value || '';
+            const direccionEntrega = document.getElementById('direccion').value;
+            const cantidad = document.getElementById('cantidad').value;
+
+            if (productos[productoId]) {
+                const producto = productos[productoId];
+                const total = cantidad * producto.precio;
+
+                const mensajeModal = document.getElementById('mensajeConfirmacion');
+                mensajeModal.innerHTML = `
+                    <strong>${producto.titulo}</strong><br>
+                    <strong>${primerNombre} ${segundoNombre} ${primerApellido} ${segundoApellido}</strong>,<br>
+                    ¡Gracias por su compra!<br>
+                    <br>
+                    <strong>Detalles de la Compra:</strong><br>
+                    <ul>
+                        <li><strong>Cantidad:</strong> ${cantidad}</li>
+                        <li><strong>Total:</strong> USD ${total.toLocaleString()}</li>
+                        <li><strong>Dirección:</strong> ${direccionEntrega}</li>
+                    </ul>
+                    Su pedido llegará próximamente a la dirección proporcionada.
+                `;
+        const modal = new bootstrap.Modal(document.getElementById('mensajeModal'));
+        modal.show();
+    } else {
+        alert('Producto no encontrado.');
+    }
+});
+    
+        // Redirigir después de aceptar
+        aceptarCompra.addEventListener('click', () => {
+            window.location.href = 'index2.html';
+        });
+    
+        // Verificar si el ID del producto es válido
+        if (productos[productoId]) {
+            const producto = productos[productoId];
+    
+            // Actualizar contenido del producto
+            document.getElementById("titulo-producto").textContent = producto.titulo;
+            document.getElementById("imagen-producto").src = producto.imagen;
+            document.getElementById("imagen-producto").alt = producto.titulo;
+            document.getElementById("descripcion-producto").textContent = producto.descripcion;
+    
+            // Cargar detalles dinámicamente
+            const detallesElemento = document.getElementById("detalles-producto");
+            producto.detalles.forEach(detalle => {
+                const li = document.createElement("li");
+                li.innerHTML = `<i class="bi bi-check-circle text-success"></i> ${detalle.label}: <strong>${detalle.valor}</strong>`;
+                detallesElemento.appendChild(li);
+            });
+    
+            // Actualizar el botón de compra
+            document.getElementById("boton-comprar").href = `comprar.html?id=${productoId}`;
+        } else {
+            // Producto no encontrado
+            document.querySelector("section").innerHTML = `
+                <div class="text-center">
+                    <h2 class="text-danger">Producto no encontrado</h2>
+                    <a href="index2.html" class="btn btn-secondary mt-4"><i class="bi bi-arrow-left"></i> Volver</a>
+                </div>
+            `;
+        }
+    </script>
+    
+</body>
+</html>

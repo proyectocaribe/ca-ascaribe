@@ -1,0 +1,128 @@
+/* General */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+.hero {
+    background: linear-gradient(to right, rgba(0, 51, 102, 0.8), rgba(0, 102, 153, 0.8)), url('../images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: white;
+}
+
+.hero h1 {
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-top: 15px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.hero .btn {
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.hero .btn:hover {
+    transform: scale(1.1);
+}
+
+/* Historia */
+#historia {
+    background-color: #f0f4f7; /* Azul muy suave */
+    padding: 60px 20px;
+}
+
+#historia h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #004d40; /* Verde oscuro */
+}
+
+#historia p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555; /* Gris oscuro */
+}
+
+#historia i {
+    font-size: 4rem;
+    color: #004d40; /* Ícono verde oscuro */
+    margin-top: 20px;
+}
+
+/* Misión */
+#mision {
+    background-color: #fff7e6; /* Naranja pastel suave */
+    padding: 60px 20px;
+}
+
+#mision h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #004d40; /* Verde oscuro */
+}
+
+#mision p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555; /* Gris oscuro */
+}
+
+#mision i {
+    font-size: 4rem;
+    color: #004d40; /* Ícono verde oscuro */
+    margin-top: 20px;
+}
+
+/* Visión */
+#vision {
+    background-color: #eef7ee; /* Verde pastel claro */
+    padding: 60px 20px;
+}
+
+#vision h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #004d40; /* Verde oscuro */
+}
+
+#vision p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555; /* Gris oscuro */
+}
+
+#vision i {
+    font-size: 4rem;
+    color: #004d40; /* Ícono verde oscuro */
+    margin-top: 20px;
+}
+
+/* Animaciones para íconos */
+#historia i,
+#mision i,
+#vision i {
+    transition: transform 0.3s, color 0.3s;
+}
+
+#historia i:hover,
+#mision i:hover,
+#vision i:hover {
+    transform: scale(1.2);
+    color: #00796b; /* Verde azulado al pasar el cursor */
+}
